@@ -1,11 +1,13 @@
 import classes from "./FormAuth.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie";
 
 // đây là component chứa form đăng nhập và đăng ký
 function FormAuth({ setIsLogin }) {
+  const [loading, setLoading] = useState(false);
+
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
   const fullname = useRef();
@@ -16,6 +18,7 @@ function FormAuth({ setIsLogin }) {
 
   // xữ lý sự kiện khi người dùng nhấn vào submit form
   const handleAuth = (e) => {
+    setLoading(true);
     e.preventDefault();
     const data = getDataForm(fullname, email, password, phone, mode);
 
@@ -40,6 +43,7 @@ function FormAuth({ setIsLogin }) {
                 "isLogin",
                 JSON.stringify(response.data.data.fullName)
               );
+              setLoading(false);
               setIsLogin(true);
               alert(response.data.message);
               navigate("/");
@@ -102,9 +106,17 @@ function FormAuth({ setIsLogin }) {
               {mode === "signUp" && (
                 <input ref={phone} type="text" placeholder="Phone" />
               )}
-              <button onClick={handleAuth}>{`${
-                mode === "login" ? "login" : "signUp"
-              }`}</button>
+              <button onClick={handleAuth}>
+                {`${mode === "login" ? "login" : "signUp"}`}
+                {loading && (
+                  <span
+                    className="spinner-border ms-4 align-middle text-danger"
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </span>
+                )}
+              </button>
               <div className={classes["toggle"]}>
                 <span>
                   {`${mode === "login" ? "Ceate a account" : "login"}`} ?
