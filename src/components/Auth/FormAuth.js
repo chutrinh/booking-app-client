@@ -52,6 +52,7 @@ function FormAuth({ setIsLogin }) {
             }
           })
           .catch((error) => {
+            setLoading(false);
             alert(error.message);
           });
       }
@@ -66,6 +67,7 @@ function FormAuth({ setIsLogin }) {
           })
           .then((response) => {
             if (response.data.status === 200) {
+              setLoading(false);
               alert(response.data.message);
               navigate("?mode=login");
             } else {
@@ -73,6 +75,7 @@ function FormAuth({ setIsLogin }) {
             }
           })
           .catch((error) => {
+            setLoading(false);
             alert(error.message);
           });
       }
