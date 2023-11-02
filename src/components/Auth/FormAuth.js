@@ -87,8 +87,18 @@ function FormAuth({ setIsLogin }) {
               {mode === "signUp" && (
                 <input ref={fullname} type="text" placeholder="Full Name" />
               )}
-              <input ref={email} type="enail" placeholder="Email" />
-              <input ref={password} type="password" placeholder="Password" />
+              <input
+                ref={email}
+                type="enail"
+                placeholder="Email"
+                defaultValue="client@gmail.com"
+              />
+              <input
+                ref={password}
+                type="password"
+                placeholder="Password"
+                defaultValue="123"
+              />
               {mode === "signUp" && (
                 <input ref={phone} type="text" placeholder="Phone" />
               )}
