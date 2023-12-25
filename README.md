@@ -40,7 +40,6 @@ Start the server
 
 ## Tech Stack
 
-**admin:** React, bootstrap, socket.io-client
+React, bootstrap, socket.io-client
 
-**Server:** Node, Express, socket.io
 
